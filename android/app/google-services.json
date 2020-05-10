@@ -1,0 +1,69 @@
+{
+  "project_info": {
+    "project_number": "251520553540",
+    "firebase_url": "https://jippy-1552335600424.firebaseio.com",
+    "project_id": "jippy-1552335600424",
+    "storage_bucket": "jippy-1552335600424.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:251520553540:android:c852eb69c1b81deee8a211",
+        "android_client_info": {
+          "package_name": "com.example.andu"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "251520553540-flbiu0jdm98d66ssih0hq35leh44o3fd.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyCuQpFG7Y7KmI8UNAJVz68CBHvPUewxVKU"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "251520553540-flbiu0jdm98d66ssih0hq35leh44o3fd.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    },
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:251520553540:android:30e033311a9e10b3e8a211",
+        "android_client_info": {
+          "package_name": "com.example.brew_app"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "251520553540-flbiu0jdm98d66ssih0hq35leh44o3fd.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyCuQpFG7Y7KmI8UNAJVz68CBHvPUewxVKU"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "251520553540-flbiu0jdm98d66ssih0hq35leh44o3fd.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
