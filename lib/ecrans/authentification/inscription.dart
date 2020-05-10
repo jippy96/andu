@@ -74,15 +74,15 @@ class _InscriptionState extends State<Inscription> {
                         onChanged: (val) => password = val,
                         validator: (val) {
                           if (val.isEmpty || val.length <= 4) {
-                            return 'Veuillez saisir un mot de passe supérieur à 4 caractères';
+                            return 'Veuillez saisir un mot de passe supérieur à 6 caractères';
                           } else {
                             return null;
                           }
                         },
                         obscureText: true,
                         keyboardType: TextInputType.text,
-                        decoration:
-                            textfield.copyWith(hintText: 'Mot de passe'),
+                        decoration: textfield.copyWith(
+                            hintText: 'Mot de passe (Min 6 caractères)'),
                       ),
                       SizedBox(
                         height: 25,
@@ -91,7 +91,7 @@ class _InscriptionState extends State<Inscription> {
                         onChanged: (val) => password2 = val,
                         validator: (val) {
                           if (val.isEmpty || val.length <= 4) {
-                            return 'Veuillez saisir un mot de passe supérieur à 4 caractères';
+                            return 'Veuillez saisir un mot de passe supérieur à 6 caractères';
                           } else {
                             return null;
                           }
@@ -116,11 +116,16 @@ class _InscriptionState extends State<Inscription> {
                               print('mot de passe identique');
                               dynamic resultat = await firebaseService
                                   .inscriptionUser(email, password, prenoms);
-                              if (resultat == null) {
+
+                              if (resultat != null) {
                                 setState(() {
                                   isLoading = false;
                                 });
-                                print('echec');
+                               Navigator.pushReplacement(context,
+                                  MaterialPageRoute(
+                                      builder: (BuildContext context) {
+                                return Connexion();
+                                  }));
                               }
                             } else {
                               setState(() {

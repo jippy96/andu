@@ -8,9 +8,11 @@ class User {
 class UserData {
   final String prenoms;
   final String uid;
+  final String email;
 
   UserData({
     this.prenoms,
-    this.uid
+    this.uid,
+    this.email
   });
 }

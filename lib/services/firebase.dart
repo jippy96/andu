@@ -24,7 +24,7 @@ class FirebaseService {
       FirebaseUser firebaseUser = _result.user;
 
       // inscription data
-      await DatabaseService(uid: firebaseUser.uid).updateUserDataOrCreate(prenoms);
+      await DatabaseService(uid: firebaseUser.uid).updateUserDataOrCreate(prenoms, email);
       return _UserFromFirebaseUser(firebaseUser);
       
     } catch (e) {

@@ -1,3 +1,4 @@
+import 'package:andu/models/user.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
 
 class DatabaseService {
@@ -12,9 +13,24 @@ class DatabaseService {
   final CollectionReference collectionReference = Firestore.instance.collection('users');
 
   // insertion ou modification data user
-  Future updateUserDataOrCreate(String prenoms) async {
+  Future updateUserDataOrCreate(String prenoms, String email) async {
     return await collectionReference.document(uid).setData({
-      'prenom':prenoms,      
+      'prenom':prenoms,
+      'email':email      
     });
+  }
+
+  // select des infos users
+  Stream<UserData> get userData{
+    return collectionReference.document(uid).snapshots().map(_userdataFromSnapshot);
+  }
+
+  // userdata from snapshot
+  UserData _userdataFromSnapshot(DocumentSnapshot snapshot){
+    return UserData(
+      uid: uid,
+      prenoms: snapshot.data['prenom'],
+      email: snapshot.data['email'],
+    );
   }
 }

@@ -1,4 +1,5 @@
 import 'package:andu/models/ressources.dart';
+import 'package:andu/widget/video_player.dart';
 import 'package:flutter/material.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 
@@ -14,7 +15,7 @@ extension ColorExtension on String {
   }
 }
 
-class DetailsCours extends StatelessWidget {
+class DetailsCours extends StatefulWidget {
   final String nom;
   final List<Video> videos;
   final List<Document> documents;
@@ -25,6 +26,11 @@ class DetailsCours extends StatelessWidget {
     this.documents,
   });
   @override
+  _DetailsCoursState createState() => _DetailsCoursState();
+}
+
+class _DetailsCoursState extends State<DetailsCours> {
+  @override
   Widget build(BuildContext context) {
     return DefaultTabController(
       child: Scaffold(
@@ -33,7 +39,7 @@ class DetailsCours extends StatelessWidget {
           backgroundColor: Colors.grey[50],
           iconTheme: new IconThemeData(color: '#18D09D'.toColor()),
           title: Text(
-            nom,
+            widget.nom,
             style: TextStyle(color: '#18D09D'.toColor()),
           ),
           actions: <Widget>[
@@ -50,7 +56,6 @@ class DetailsCours extends StatelessWidget {
                 )),
           ],
           bottom: TabBar(tabs: [
-
             Tab(
               child: Text(
                 'Documents',
@@ -74,26 +79,58 @@ class DetailsCours extends StatelessWidget {
         ),
         body: TabBarView(children: <Widget>[
           Center(
-            child: ListView.builder(
-              itemCount: documents.length,
-              itemBuilder: (BuildContext context, int index){
-                Document document = documents[index];
-              return Card(
-                child: Container(
-                  height: 80,
-                  child: ListTile(
-                    trailing: FaIcon(FontAwesomeIcons.download),
-                    title: Text('${document.nom}', textAlign: TextAlign.center,),
-                  )
+              child: ListView.builder(
+                  itemCount: documents.length,
+                  itemBuilder: (BuildContext context, int index) {
+                    Document document = widget.documents[index];
+                    return Card(
+                      child: Container(
+                          padding: EdgeInsets.only(top: 10),
+                          height: 80,
+                          child: ListTile(
+                            leading: IconButton(
+                                icon: (document.favoris == 0)
+                                    ? FaIcon(Icons.favorite_border)
+                                    : FaIcon(
+                                        Icons.favorite,
+                                        color: Colors.red,
+                                      ),
+                                onPressed: () {
+                                  setState(() {
+                                    document.favoris =
+                                        (document.favoris == 0) ? 1 : 0;
+                                  });
+                                }),
+                            trailing: FaIcon(FontAwesomeIcons.download),
+                            title: Text(
+                              '${document.nom}',
+                              textAlign: TextAlign.center,
+                            ),
+                            subtitle: Row(
+                              mainAxisAlignment: MainAxisAlignment.center,
+                              children: <Widget>[
+                                Text('Taille : ${document.taille} Mo'),
+                                Text("\t-\tType : pdf")
+                              ],
+                            ),
+                          )),
+                    );
+                  })),
+          Center(
+            child: VideoPlay(),
+          ),
+          Center(
+            child: Column(
+              mainAxisAlignment: MainAxisAlignment.center,
+              children: <Widget>[
+                FaIcon(FontAwesomeIcons.fileDownload, size: 50, color: '#18D09D'.toColor()),
+                SizedBox(height: 20,),
+                Text(
+                  'Le centre de téléchargement est vide.',
+                  style: TextStyle(fontWeight: FontWeight.bold, fontSize: 18),
                 ),
-              );
-            })
-          ),
-          Center(
-            child: Text('data2'),
-          ),
-          Center(
-            child: Text('data3'),
+              ],
+            ),
           ),
         ]),
         bottomNavigationBar: BottomNavigationBar(
@@ -101,12 +138,12 @@ class DetailsCours extends StatelessWidget {
           elevation: 10,
           items: [
             BottomNavigationBarItem(
-              icon: FaIcon(FontAwesomeIcons.paperclip),
-              title: Text('Semestre1'),
+              icon: FaIcon(FontAwesomeIcons.chalkboardTeacher),
+              title: Text('Semestre'),
             ),
             BottomNavigationBarItem(
-              icon: FaIcon(FontAwesomeIcons.paperPlane),
-              title: Text('Semestre1'),
+              icon: FaIcon(FontAwesomeIcons.heart),
+              title: Text('Favoris'),
             ),
             BottomNavigationBarItem(
               icon: FaIcon(FontAwesomeIcons.folder),
